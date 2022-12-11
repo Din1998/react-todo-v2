@@ -6,8 +6,8 @@ function Board() {
     return (
       <div className="board__section">
           
-          <Drawer />
-          <BoardCanvas />
+          
+          
       </div>
     );
   }

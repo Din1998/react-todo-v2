@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPencil,faRemove } from '@fortawesome/free-solid-svg-icons'
 import { useDrag } from "react-dnd"
 
-const TodoList = (props) => {
+const TodoWithUser = (props) => {
     const todolist = props.todolist.map((task,index) => {
 
         const removeTask = id => {
@@ -16,7 +16,7 @@ const TodoList = (props) => {
         return (
             <li key={index} >
                 <p className="tasks"
-                >{task.profileName}</p>  
+                >{task.todo}</p>  
                 <div className="group__btn">
                     {/* Update Button */}
                     <button
@@ -51,4 +51,4 @@ const TodoList = (props) => {
   )
 }
 
-export default TodoList;
+export default TodoWithUser;

@@ -6,10 +6,15 @@ import Home from './pages/Home';
 import {BrowserRouter as Router,Routes,Route,Navigate} from 'react-router-dom';
 import Login from './component/LoginCard';
 import { useEffect, useState } from 'react';
+import axios from 'axios';
+import TaskList from './component/TaskList'
+import store from './store';
+
 
 function App() {
 
-  const [user,setUser] = useState(null)
+ const [user,setUser] = useState()
+ const [todoList,setTodoList] = useState([])
   
   useEffect(() => {
     const getUser =  () => {
@@ -32,28 +37,42 @@ function App() {
     };
     getUser();
   },[])
-  
+
+  const getId = user ?user.id : [0]
+
+  console.log(getId)
+
+ 
+
+
+  useEffect(() => {
+    axios.get(`http://localhost:5000/api/task/`)
+    .then( res => {
+        setTodoList(res.data)
+    }).catch(err => console.log(err))
+    
+  },[])
+
+console.log(todoList)
+
+console.log(user)
 
   return (
     <div className="App">
+      
       <Router>
         <Navbar user={user} />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/' 
-            element={user ?  <Home /> : <Navigate to="/board" /> }
-            />
           <Route path='/login'
             element={user ? <Navigate to="/board" /> : <Login /> }
            />
           <Route path='/login'
             element={user ? <CreateBoard /> : <Navigate to="/login" /> }
           />
-          <Route path='/board'
-            element={user ? <Board /> : <Navigate to="/login" />}
-          />
         </Routes>
       </Router> 
+      <TaskList user={getId} todolist={todoList} />
     </div>
   );
 }

@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
 
+
 function Navbar({user}) {
 
   const logout = () => {
     window.open("http://localhost:5000/auth/logout", "_self");
   }
+
     return (
       <div className="navbar">
-        <h1 className="app__logo">Task M.</h1>
+        <h1 className="app__logo">Task_M.</h1>
         { user ? (
         <ul className="nav__ul nav">
             <img
@@ -17,9 +19,10 @@ function Navbar({user}) {
                 referrerPolicy="no-referrer"
             />
             <li className="nav__list">{user.displayName}</li>
-            <Link className="links" to={'/board'}>
+            
+            {/* <Link className="links" to={'/board'}>
               <li>ToDo</li>
-            </Link>
+            </Link> */}
             
             <li className="nav__list" onClick={logout}>Logout</li>
         </ul>
